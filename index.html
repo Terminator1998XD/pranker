@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="//vkplay.ru/app/33275/static/mailru.core.js"></script>
+	<script src="js/jquery.js"></script>
+  <script src="js/music.js"></script>
+	<script src="js/YSDKManager1.js"></script>
+  <script src="js/term.js"></script>
+  <script src="js/interop1.js"></script>
+  <script src="js/advprompt.js"></script>
+  <script src="js/moregames.js"></script>
+  <script src="js/ui1.js"></script>
+  <title translate="Pranker Simulator">Симулятор пранкера</title>
+  <script src="js/gameloader.js"></script>
+	<link rel="stylesheet" type="text/css" href="style1.css">
+    <script>window.alert = function(_log){console.log(_log);};
+    document.addEventListener('DOMContentLoaded', function() {
+window.unityInstance = UnityLoader.instantiate("unityContainer", "Build/build.json");
+});</script>
+  </head>
+  <body>
+  <div id="unityContainer" style="width: 100%; height: 100%; margin: auto"></div>
+  <style>
+  #ui > *{
+    position: absolute;
+    z-index: 4;
+    display: block;
+  }
+
+  .pfocus{
+    width:8vw;
+    height: 20vh;
+    bottom: 2vh;
+    cursor: pointer;
+  }
+
+  .pfocus ._name{
+    color:white;
+    text-shadow:2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 2vh;
+    position: absolute;
+    left: 1.9vw;
+    top: -2vh;
+  }
+
+  .pfocus img{
+    width: 100%;
+    height: 100%;
+  }
+
+  #playerfocus{
+    right: 0vw;
+  }
+
+  #sosedfocus{
+    left: 0vw;
+  }
+
+  #inv{
+    bottom: 2vh;
+    left:25vw;
+    width: 60vw;
+    height: 15vh;
+    background-color: #A0AD9B;
+    border-radius: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:white;
+  }
+
+  #itemd{
+    display: block;
+    margin-top: 0.3vh;
+    background-color: black;
+    text-align: center;
+    font-size: 2vh;
+    padding-top:0.5vh;
+    padding-bottom: 0.5vh;
+  }
+
+  #items{
+    display: block;
+    background-color: #8087A4;
+    width: 95%;
+    margin-left: 2%;
+    height: 70%;
+    margin-top: 0.3vh;
+    border-radius: 10px;
+  }
+
+  .item,.itemselect{
+     display: inline-block;
+     margin-right: 5%;
+     margin-top: 1%;
+     width: 5%;
+     height: 98%;
+     text-align: center;
+     cursor: pointer;
+     font-size: 2vh;
+  }
+
+  .item img:hover{
+    background-color: #2b78ea;
+    border-radius: 5px;
+  }
+
+  .item img:active{
+    background-color: #753fe2;
+    border-radius: 5px;
+  }
+
+  .item img{
+    width: 100%;
+    height: 60%;
+    margin-left: 7px;
+  }
+
+  .itemselect img{
+    width: 100%;
+    height: 60%;
+    margin-left: 7px;
+    background-color: #753fe2;
+    border-radius: 5px;
+  }
+
+  #info{
+    color:white;
+    text-shadow:2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 4vh;
+    right: 0vw;
+    top:1vh;
+  }
+
+  #scoreBlock{
+    position: absolute;
+    left:1vw;
+    top:1vh;
+    font-size: 4vh;
+    color:white;
+    text-shadow:2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 6;
+  }
+  </style>
+  <div id="ui" style="display:none;">
+    <div id="thermometer"></div>
+    <div id="termdisp">
+      <p><span id="thermometerText">36.6</span>&deg;C</p>
+      <p><span translate="Multiplier">Множитель</span>: x<span id="mulsc">2</span></p>
+    </div>
+    <div id="inv">
+      <div id="itemd">
+      Инвентарь
+      </div>
+      <div id="items">
+      </div>
+    </div>
+    <div id="info">
+    <div><span translate="Made of pranks">Сделано пранков</span>: <span id="pr">0</span>/<span class="pn">0</span></div>
+    <div><span translate="Successful pranks">Удачных пранков</span>: <span id="pc">0</span>/<span class="pn">0</span></div>
+    <div><span translate="Level Time">Время уровня</span>: <span id="time">0:00</span></div>
+    </div>
+    <div class="pfocus" id="playerfocus" onclick="PlayerFocus()"><span class="_name" translate="Player">Игрок</span><img src="png/player.png" onmouseover="this.src='png/playerHover.png';" onmouseout="this.src='png/player.png';" engtitle="Show the player (E key)" title="Показать игрока (Клавиша E)"></div>
+    <div class="pfocus" id="sosedfocus" onclick="SosedFocus()"><span class="_name" translate="Neighbour">Сосед</span><img src="png/sosed.png" onmouseover="this.src='png/sosedHover.png';" onmouseout="this.src='png/sosed.png';" engtitle="Show the neighbor (Q key)" title="Показать соседа (Клавиша Q)"></div>
+  </div>
+  <span id="k1">
+	<div class="overlay" style="display:none;">
+    <div class="content" style="display:none;" id="lesson">
+  		<h2>Обучение</h2>
+  		<p><video src="tutorial.mp4" controls></video></p>
+  		<p><button onclick="lessonEnd()">Продолжить</button></p>
+  	</div>
+    <div class="content" id="startgame">
+        <h1 translate="Pranker Simulator">Симулятор пранкера</h1>
+        <p><span translate="Your record">Ваш рекорд</span>: <span class="time_rec" translate="is not set">Не установлен</span></p>
+        <p><button onclick="ui_playclick()" translate="Play">Играть</button></p>
+        <br>
+        <p><span translate="Current level">Текущий уровень</span>: <span id="levelname"></span></p>
+        <span id="levelselector"></span>
+        <p><button translate="Recommended games" onclick="moregames('#startgame')">Рекомендованные игры</button></p>
+    </div>
+    <div class="content" id="win" style="display:none;">
+        <h1 translate="Pranker Simulator">Симулятор пранкера</h1>
+        <p translate="Congratulations! You have won!">Поздравляю! Вы победили!</p>
+        <p>Время уровня: <span id="time2">0:00</span></p>
+        <p>Ваш рекорд: <span class="time_rec">0:00</span></p>
+        <p><button onclick="ShowMenu()" translate="Main Menu">Главное меню</button></p>
+    </div>
+    <div class="content" id="moregames" style="display:none">
+				<p><button translate="Back" onclick="moregamesback()">Назад</button></p>
+		</div>
+  </div>
+  </span>
+  <div id="scoreBlock" style="display:none"><span translate="Score">Очков</span>: <span id="_score">0</span></div>
+  </body>
+</html>
