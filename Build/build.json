@@ -2,7 +2,7 @@
 "companyName": "DefaultCompany",
 "productName": "Sosed",
 "productVersion": "0.1",
-"dataUrl": "build.data.unityweb",
+"dataUrl": "https://www.dropbox.com/scl/fi/lzsz60ohmuuevbi5hn5bq/build.data.unityweb?rlkey=j5ox2a681r8k3x170lguredmj&dl=0&raw=1",
 "wasmCodeUrl": "build.wasm.code.unityweb",
 "wasmFrameworkUrl": "build.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
