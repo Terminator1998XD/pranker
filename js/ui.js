@@ -20,11 +20,12 @@ function ui_playclick(){
 var lessonEndCallback;
 function showLesson(lessonEnd,check){//если check == true, значит если пользователь видел обучение скипаем
 
-  if(check && localStorage['lesson'] != null || ysdk.environment.i18n.lang != 'ru'){
+  if(check && localStorage['lesson'] != null || window.lang != 'ru'){
     lessonEnd();
     return;
   }
 
+  $('#lsw').hide();
   lessonEndCallback=lessonEnd;
   $('.overlay > .content').hide();
   $('#lesson').show();
@@ -36,6 +37,7 @@ function lessonEnd(){
     this.pause();
   });
   $('#lesson').hide();
+  $('#lsw').show();
   lessonEndCallback();
 }
 

@@ -2,7 +2,7 @@
 "companyName": "DefaultCompany",
 "productName": "Sosed",
 "productVersion": "0.1",
-"dataUrl": "https://download1584.mediafire.com/2wcazwm1i42g-dQk6vH5aiiCXdZ2OI1m6HcrN4QEd5xyOz9ebkYoTxQaJ_3-UZ3tl8mIBJJv059LDWSfgteFFDEqXvlFjKdWRvCinfp7tHZBQLWPxFTQc4ILDxCyqBd4MAx1oIiN1acN5Li6tR4EjlyM71EU-clqkr2ce8VhR0Cb/ox3ll8hsphg3nru/build.data.unityweb",
+"dataUrl": "build.data.unityweb",
 "wasmCodeUrl": "build.wasm.code.unityweb",
 "wasmFrameworkUrl": "build.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],

@@ -6,12 +6,12 @@
 	<script type="text/javascript" src="//vkplay.ru/app/33275/static/mailru.core.js"></script>
 	<script src="js/jquery.js"></script>
   <script src="js/music.js"></script>
-	<script src="js/YSDKManager1.js"></script>
+	<script src="js/YSDKManager.js"></script>
   <script src="js/term.js"></script>
-  <script src="js/interop1.js"></script>
+  <script src="js/interop.js"></script>
   <script src="js/advprompt.js"></script>
   <script src="js/moregames.js"></script>
-  <script src="js/ui1.js"></script>
+  <script src="js/ui.js"></script>
   <title translate="Pranker Simulator">Симулятор пранкера</title>
   <script src="js/gameloader.js"></script>
 	<link rel="stylesheet" type="text/css" href="style1.css">
@@ -178,8 +178,7 @@ window.unityInstance = UnityLoader.instantiate("unityContainer", "Build/build.js
         <p><button onclick="ui_playclick()" translate="Play">Играть</button></p>
         <br>
         <p><span translate="Current level">Текущий уровень</span>: <span id="levelname"></span></p>
-        <span id="levelselector"></span>
-        <p><button translate="Recommended games" onclick="moregames('#startgame')">Рекомендованные игры</button></p>
+        <span id="levelselector"></span>        
     </div>
     <div class="content" id="win" style="display:none;">
         <h1 translate="Pranker Simulator">Симулятор пранкера</h1>
@@ -188,8 +187,9 @@ window.unityInstance = UnityLoader.instantiate("unityContainer", "Build/build.js
         <p>Ваш рекорд: <span class="time_rec">0:00</span></p>
         <p><button onclick="ShowMenu()" translate="Main Menu">Главное меню</button></p>
     </div>
-    <div class="content" id="moregames" style="display:none">
-				<p><button translate="Back" onclick="moregamesback()">Назад</button></p>
+    <div style="position: absolute; right: 0; top: 0;" id="lsw">
+				<p><button onclick="setlang('ru')">Русский</button></p>
+				<p><button onclick="setlang('en')">English</button></p>
 		</div>
   </div>
   </span>

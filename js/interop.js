@@ -1,7 +1,6 @@
 var score = localStorage['score'];
 score = score == null ? 0 : parseInt(score);
 var score_mul = 1;
-var score_mul_flag = 1;
 const isMobile = false;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function MenuLoaded(){
   $('#ui').show();
-  if(ysdk.environment.i18n.lang != 'ru') {
+  if(window.lang != 'ru') {
     unityInstance.SendMessage('MenuCamera', 'SetEnglish');
     translateBlocks();
   }
@@ -25,15 +24,45 @@ function MenuLoaded(){
 var mustTranslate = true;
 function translateBlocks(){
   if(mustTranslate){
-      $('[translate]').each(function() {
-        $(this).html($(this).attr('translate'));
-    });
+    _translateBlocks();
     $('[engtitle]').each(function() {
       $(this).attr('title', $(this).attr('engtitle'));
     });
     $('#enghideless').hide();
     mustTranslate = false;
   }
+}
+
+function _translateBlocks(){
+
+  if(_translateBlocks.flag){
+    $('[translate]').each(function() {
+      $(this).attr('translate_ru',$(this).html());
+    });
+    _translateBlocks.flag = false;
+  }
+
+    $('[translate]').each(function() {
+      const value = $(this).attr(lang == 'ru' ? 'translate_ru':'translate');
+      $(this).html(value);
+    $(this).show();
+  });
+}
+
+_translateBlocks.flag = true;
+
+function setlang(l){
+  window.lang = l;
+  _translateBlocks();
+  localStorage['savelang'] = l;
+
+  if(l == 'ru'){
+    unityInstance.SendMessage('MenuCamera', 'SetEnglish');
+  } else {
+    unityInstance.SendMessage('MenuCamera', 'SetRussian');
+  }
+
+  unityInstance.SendMessage('MenuCamera', 'ChangeLevel', 0);  
 }
 
 function SetCursor(cursor){
@@ -49,7 +78,7 @@ function setSosedName(_name){
 }
 
 function AddScore(sc){
-  score+=parseInt(parseInt(sc) * score_mul * score_mul_flag);
+  score+=parseInt(parseInt(sc) * score_mul);
   updscore();
   localStorage['score'] = score;
 
